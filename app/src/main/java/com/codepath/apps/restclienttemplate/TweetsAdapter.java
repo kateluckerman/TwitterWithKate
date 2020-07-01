@@ -85,6 +85,9 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 ivMedia.getLayoutParams().height = 300;
                 ivMedia.requestLayout();
                 Glide.with(context).load(tweet.imageURL).into(ivMedia);
+            } else {
+                ivMedia.getLayoutParams().height = 0;
+                ivMedia.requestLayout();
             }
         }
     }
