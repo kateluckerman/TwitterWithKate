@@ -59,6 +59,9 @@ public class ComposeActivity extends AppCompatActivity {
                 if (charLeft < 0) {
                     tvCount.setTextColor(Color.RED);
                 }
+                if (tvCount.getCurrentTextColor() == Color.RED && charLeft > 0) {
+                    tvCount.setTextColor(Color.BLACK);
+                }
             }
             @Override
             public void afterTextChanged(Editable s) { }
