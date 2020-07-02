@@ -85,12 +85,10 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvTime.setText(Tweet.getRelativeTimeAgo(tweet.createdAt));
             Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
             if (tweet.imageURL != null) {
-                ivMedia.getLayoutParams().height = 300;
-                ivMedia.requestLayout();
+                ivMedia.setVisibility(View.VISIBLE);
                 Glide.with(context).load(tweet.imageURL).into(ivMedia);
             } else {
-                ivMedia.getLayoutParams().height = 0;
-                ivMedia.requestLayout();
+                ivMedia.setVisibility(View.GONE);
             }
         }
 
