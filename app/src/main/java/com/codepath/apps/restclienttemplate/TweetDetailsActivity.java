@@ -18,6 +18,7 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import org.parceler.Parcels;
 import org.w3c.dom.Text;
 
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import okhttp3.Headers;
 
 public class TweetDetailsActivity extends AppCompatActivity {
@@ -32,6 +33,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
     ImageView ivFavorite;
     ImageView ivRetweet;
     Tweet tweet;
+    ImageView ivMedia;
 
     TwitterClient client;
 
@@ -40,6 +42,8 @@ public class TweetDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet_details);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         ivProfileImage = findViewById(R.id.ivProfileImage);
         tvName = findViewById(R.id.tvName);
         tvScreenName = findViewById(R.id.tvScreenName);
@@ -47,16 +51,24 @@ public class TweetDetailsActivity extends AppCompatActivity {
         tvTime = findViewById(R.id.tvTime);
         ivFavorite = findViewById(R.id.ivFavorite);
         ivRetweet = findViewById(R.id.ivRetweet);
+        ivMedia = findViewById(R.id.ivMedia);
 
         client = new TwitterClient(this);
 
         tweet = Parcels.unwrap(getIntent().getParcelableExtra("tweet"));
 
         tvName.setText(tweet.user.name);
-        tvScreenName.setText(tweet.user.screenName);
+        tvScreenName.setText("@" + tweet.user.screenName);
         tvBody.setText(tweet.body);
         tvTime.setText(tweet.createdAt);
-        Glide.with(this).load(tweet.user.profileImageUrl).into(ivProfileImage);
+        Glide.with(this).load(tweet.user.profileImageUrl).transform(new RoundedCornersTransformation(10, 0)).into(ivProfileImage);
+
+        if (tweet.imageURL != null) {
+            ivMedia.setVisibility(View.VISIBLE);
+            Glide.with(this).load(tweet.imageURL).into(ivMedia);
+        } else {
+            ivMedia.setVisibility(View.GONE);
+        }
 
         ivFavorite.setOnClickListener(new View.OnClickListener() {
             @Override

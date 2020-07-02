@@ -42,6 +42,8 @@ public class TimelineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         client = TwitterApp.getRestClient(this);
 
         swipeContainer = findViewById(R.id.swipeContainer);
@@ -87,7 +89,7 @@ public class TimelineActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.e(TAG, "onFailure for loadMoreData", throwable);
+                Log.e(TAG, "onFailure for loadMoreData" + response, throwable);
             }
         }, tweets.get(tweets.size() - 1).id);
     }
@@ -139,7 +141,7 @@ public class TimelineActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.e(TAG, "onFailure:,", throwable);
+                Log.e(TAG, "onFailure:" + response, throwable);
             }
         });
     }

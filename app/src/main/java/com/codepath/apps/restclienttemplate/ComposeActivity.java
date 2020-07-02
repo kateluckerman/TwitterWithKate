@@ -39,6 +39,8 @@ public class ComposeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         client = TwitterApp.getRestClient(this);
 
         etCompose = findViewById(R.id.etCompose);
