@@ -62,6 +62,9 @@ public class Tweet {
             e.printStackTrace();
         }
 
+//        String[] num = relativeDate.split(" ");
+//        relativeDate = num[0] + num[1].charAt(0);
+
         return relativeDate;
     }
 }
